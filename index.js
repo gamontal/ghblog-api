@@ -3,12 +3,12 @@ var got = require('got');
 var cheerio = require('cheerio');
 var Promise = require('pinkie-promise');
 
-module.exports = function (category) {
+module.exports = function (category, pageNum) {
 	  if (typeof category !== 'string') {
 		    return Promise.reject(new Error('category required'));
 	  }
 
-	  var url = 'https://github.com/blog/category/' + category + '?page=1';
+	  var url = 'https://github.com/blog/category/' + category + '?page=' + pageNum;
 
 	  return got(url).then(function (res) {
 		    var $ = cheerio.load(res.body);
@@ -47,19 +47,22 @@ module.exports = function (category) {
         $('.blog-post-title > a').each(function(index) {
             var link = $(this);
             data[index] = {
-                title: link.text(),
-                url: 'https://github.com' + link.attr('href'),
-                created_date: dates[index],
                 author: authors[index],
+                id: link.attr('href').substring(6, link.attr('href').indexOf('-')),
+                created_date: dates[index],
+                title: link.text(),
                 category: categories[index],
+                url: 'https://github.com' + link.attr('href'),
                 avatar_url: avatarUrls[index]
             }
         });
 
 		    return JSON.stringify({
+            page_number: pageNum,
             category: category,
             results: data || null
 		    }, 2, 2);
+
 	  }).catch(function (err) {
 		    if (err.statusCode === 404) {
 			      err.message = 'Category doesn\'t exist';
