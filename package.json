@@ -1,0 +1,20 @@
+{
+  "name": "gh-blog",
+  "version": "1.0.0",
+  "description": "Get those Github blog posts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "github",
+    "blog"
+  ],
+  "author": "Gabriel Montalvo",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^0.19.0",
+    "got": "^5.2.0",
+    "pinkie-promise": "^2.0.0"
+  }
+}
