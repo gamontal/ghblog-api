@@ -1,7 +1,6 @@
 'use strict';
 var got = require('got');
 var cheerio = require('cheerio');
-var Promise = require('pinkie-promise');
 
 module.exports = function (category, pageNum) {
     var url;
