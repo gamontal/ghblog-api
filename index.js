@@ -5,14 +5,14 @@ var Promise = require('pinkie-promise');
 
 module.exports = function (category, pageNum) {
     var url;
-	  if (typeof category !== 'string') {
-		    return Promise.reject(new Error('category required'));
-	  } else if (typeof pageNum === 'undefined') {
+	  if (typeof pageNum === 'undefined') {
         pageNum = 1; // default page number
     }
 
     if (category === 'featured') {
         url = 'https://github.com/blog' + '?page=' + pageNum;
+    } else if (category === 'broadcasts') {
+        url = 'https://github.com/blog/broadcasts' + '?page=' + pageNum;
     } else {
 	      url = 'https://github.com/blog/category/' + category + '?page=' + pageNum;
     }
@@ -65,10 +65,15 @@ module.exports = function (category, pageNum) {
                 avatar_url: avatarUrls[index]
             };
         });
-		    return {
-            page_number: pageNum,
-            category: category,
-            results: data || null
-		    }
+        if (typeof data[0] === 'undefined') {
+            return null;
+        }
+        else {
+		        return {
+                page_number: pageNum,
+                category: category,
+                results: data
+		        }
+        }
 	  });
 };
