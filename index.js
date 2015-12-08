@@ -4,14 +4,22 @@ var cheerio = require('cheerio');
 var Promise = require('pinkie-promise');
 
 module.exports = function (category, pageNum) {
+    var url;
 	  if (typeof category !== 'string') {
 		    return Promise.reject(new Error('category required'));
-	  }
+	  } else if (typeof pageNum === 'undefined') {
+        pageNum = 1; // default page number
+    }
 
-	  var url = 'https://github.com/blog/category/' + category + '?page=' + pageNum;
+    if (category === 'featured') {
+        url = 'https://github.com/blog' + '?page=' + pageNum;
+    } else {
+	      url = 'https://github.com/blog/category/' + category + '?page=' + pageNum;
+    }
 
 	  return got(url).then(function (res) {
 		    var $ = cheerio.load(res.body);
+        // field arrays
         var data = [], dates = [], authors = [], categories = [], avatarUrls = [];
 
         // get dates
@@ -44,6 +52,7 @@ module.exports = function (category, pageNum) {
             categories[index] = category.replace(/^\s\s*/, '').replace(/\s*$/,'');
         });
 
+        // iterates through each title in a single page
         $('.blog-post-title > a').each(function(index) {
             var link = $(this);
             data[index] = {
@@ -54,19 +63,12 @@ module.exports = function (category, pageNum) {
                 category: categories[index],
                 url: 'https://github.com' + link.attr('href'),
                 avatar_url: avatarUrls[index]
-            }
+            };
         });
-
-		    return JSON.stringify({
+		    return {
             page_number: pageNum,
             category: category,
             results: data || null
-		    }, 2, 2);
-
-	  }).catch(function (err) {
-		    if (err.statusCode === 404) {
-			      err.message = 'Category doesn\'t exist';
 		    }
-		    throw err;
 	  });
 };
