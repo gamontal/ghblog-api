@@ -1,4 +1,4 @@
-# The Unofficial GitHub Blog API (that nobody asked for)
+# The Unofficial GitHub Blog API
 
 <img align="right" width="290" height="200" src="https://45.media.tumblr.com/7bd6faacf9985e9a8bd8d679f69f922a/tumblr_mgos5bzVqU1rz4zbso1_500.gif" /> 
 ## Overview
