@@ -11,7 +11,7 @@ var urls = {
   meetup_url: baseUrl + 'category/meetup',
   hire_url: baseUrl + 'category/hire',
   watercooler_url: baseUrl + 'category/watercooler',
-  broadcasts_url: baseUrl + 'broadcasts'
+  broadcasts_url: baseUrl + 'category/broadcasts'
 }, p;
 
 // GET http://ghblog-api.heroku.com
@@ -101,7 +101,7 @@ exports.watercooler = function(req, res) {
    });
 };
 
-// GET /blog/broadcasts
+// GET /blog/category/broadcasts
 exports.broadcasts = function(req, res) {
   p = req.param('page', 1);
   ghBlog('broadcasts', p).then(function(data) {

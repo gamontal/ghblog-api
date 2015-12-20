@@ -1,6 +1,6 @@
 {
   "name": "ghblog-api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Get those Github blog posts",
   "main": "server.js",
   "scripts": {

@@ -42,7 +42,7 @@ apiRoutes.route('/blog/category/hire').get(apiController.hire);
 apiRoutes.route('/blog/category/watercooler').get(apiController.watercooler);
 
 // http://ghblog-api.heroku.com/blog/broadcasts
-apiRoutes.route('/blog/broadcasts').get(apiController.broadcasts);
+apiRoutes.route('/blog/category/broadcasts').get(apiController.broadcasts);
 
 app.use(apiRoutes);
 
