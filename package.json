@@ -1,8 +1,8 @@
 {
-  "name": "gh-blog",
+  "name": "ghblog-api",
   "version": "1.0.0",
   "description": "Get those Github blog posts",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,7 +15,8 @@
   "dependencies": {
     "bluebird": "^3.0.6",
     "cheerio": "^0.19.0",
+    "express": "^4.13.3",
     "got": "^5.2.0",
-    "q": "^1.4.1"
+    "morgan": "^1.6.1"
   }
 }
