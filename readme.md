@@ -9,7 +9,7 @@ This RESTful style API provides JSON lists of GitHub blog posts by page.
 
 The API is based at http://ghblog-api.heroku.com.
 
-<br><br>
+<br>
 
 # Requests
 
